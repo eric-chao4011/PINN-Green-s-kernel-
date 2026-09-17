@@ -1,0 +1,20 @@
+\begin{frame}{1. Problem Statement}
+Consider the boundary value problem:
+\begin{align}
+  u_{xx} + u_{yy}  &= f(x, y), \quad (x,y)\in[-1,1]^2, \\
+  u(x, y)&=0, \quad x, y\in \partial ([-1,1]^2).
+\end{align}
+We aim to solve the problem by a neural networks Green's function $\hat{G}$,
+ the following two properties of Green's function may help us to achieve it.
+\begin{itemize}
+  \item[1.] The Green’s function representation of $u(x, y)$,
+  \begin{align}
+    u(x,y) = \int_{-1}^{1}\int_{-1}^{1}G(x,y,s,t)f(s,t)dsdt.
+  \end{align}
+  \item[2.] The adjoint problem of $G$,
+  \begin{align}
+    G_{ss}+G_{tt}&=\delta(s-x)\delta(t-y), \quad (s,t)\in[-1,1]^2, \\
+    \quad G&=0, \quad (s,t)\in \partial ([-1,1]^2).
+  \end{align}
+\end{itemize}
+\end{frame}

@@ -1,0 +1,13 @@
+net_dim=[4, 50, 50, 1], act.=GELU(approximate='none'), FFsize=100, FFscale=1, mu=0
+Ngrid=22
+NeuralNet_4D(
+  (act): GELU(approximate='none')
+  (layers): ModuleList(
+    (0): Linear(in_features=200, out_features=50, bias=True)
+    (1): Linear(in_features=50, out_features=50, bias=True)
+  )
+  (fc_ds): ModuleList()
+  (norms): ModuleList()
+  (ff): FourierFeatures()
+  (final): Linear(in_features=50, out_features=1, bias=True)
+)

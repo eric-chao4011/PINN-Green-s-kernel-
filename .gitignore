@@ -1,0 +1,31 @@
+# Python and local environments
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.env
+.env.*
+!.env.example
+# Local experiments and temporary output
+Models_PDEloss/
+tmp/
+# LaTeX build files
+*.aux
+*.log
+*.out
+*.toc
+*.nav
+*.snm
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+# Editor and OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Reproducibility checks and generated results
+outputs/
+.verification/

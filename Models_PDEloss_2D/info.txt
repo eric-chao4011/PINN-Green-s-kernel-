@@ -1,0 +1,1 @@
+PINN_model_0: Ngrid=22, net_dim=[2, 50, 50, 50], act.=GELU(approximate='none'), FFsize=100, FFscale=1, mu=0

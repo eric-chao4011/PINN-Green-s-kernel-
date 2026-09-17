@@ -1,0 +1,14 @@
+# Dependencies for the supplied notebooks and command-line evaluator.
+# Use 64-bit Python 3.12. See README.md for validation details.
+torch==2.11.0
+torchvision==0.26.0
+numpy==2.4.2
+matplotlib==3.10.8
+pandas==3.0.2
+deepsplines==1.0.0
+ipython==9.11.0
+ipykernel==7.2.0
+jinja2==3.1.6
+jupyterlab==4.6.3
+nbconvert==7.17.1
+nbformat==5.11.1
