@@ -18,6 +18,8 @@ Learn a reusable solution operator for the two-dimensional Poisson equation usin
 | Path | Purpose |
 | --- | --- |
 | main2.ipynb | Network definitions, training, prediction, and plots |
+| test.ipynb / test_functions.py | Fixed benchmark cases and reproducible evaluation |
+| test_results.csv | Full-precision benchmark metrics |
 | config.py | Network and training settings |
 | data_generator2.py | Random Fourier training data |
 | grid.py / diff.py | GLL nodes, quadrature weights, and differentiation matrices |
@@ -55,6 +57,19 @@ The default configuration is `TRAIN = False` with Plan B. The notebook loads the
 
 The checkpoints contain full PyTorch model objects and are loaded with `weights_only=False`. Only load checkpoints you trust.
 
+## Reproduced benchmark results
+
+The fixed benchmark notebook evaluates both supplied checkpoints with the same GLL grid, analytical forcing functions, and error definitions. `sup norm` is the maximum nodal absolute error, while `relative L2` is `||u_pred - u||₂ / ||u||₂`.
+
+| Test | Model | Sup norm | Relative L2 |
+| --- | --- | ---: | ---: |
+| Mixed frequency | Plan A (factorized 2D) | 8.80e-1 | 6.53e-1 |
+| Mixed frequency | Plan B (direct 4D) | 1.03e+0 | 5.73e-1 |
+| Polynomial | Plan A (factorized 2D) | 6.60e-2 | 4.79e-2 |
+| Polynomial | Plan B (direct 4D) | 5.95e-2 | 4.70e-2 |
+
+The mixed-frequency case illustrates why the two metrics should be reported separately: Plan B has a slightly larger worst-node error but a lower error over the full grid. The polynomial case is much more accurate for both models. Run `test.ipynb` to reproduce the values recorded in `test_results.csv`.
+
 ## Train a model
 
 Set `TRAIN = True` in `config.py`, then restart the notebook kernel and run `main2.ipynb` in order. New training outputs are written to `outputs/training/`, which is excluded from Git by default.
@@ -70,7 +85,7 @@ After editing the configuration, restart the notebook kernel and rerun the cells
 
 ## Notes
 
-- The paper PDF is preserved as supplied. Its abstract contains maximum-error values that were previously found inconsistent with the numerical evaluation; these values still need reconciliation.
+- The paper and benchmark table use the fixed test cases in `test.ipynb`; reported values are rounded from `test_results.csv`.
 - The paper describes a training Fourier cutoff of K=4. The current generator uses `config.RANKS=5` for the first sample in each batch and a hard-coded cutoff of 4 for subsequent samples. This setting is separate from Plan A's factorization rank of 50.
 - The factorized implementation still explicitly constructs the four-dimensional kernel tensor; it does not yet implement a fully memory-efficient factorized quadrature contraction.
 - Stored notebook outputs have been cleared. Saved model files and result images are included separately.
